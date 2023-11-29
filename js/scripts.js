@@ -2,28 +2,18 @@ function Movie(title, price) {
     this.title = title;
     this.price = price;
 }
-function Time(time) {
+const marvels = new Movie('The Marvels', 12.75);
+const minions = new Movie('Minions', 10.50);
+const notebook = new Movie('Notebook', 9.25);
+
+function Time(time, discount) {
     this.time = time;
+    this.discount = discount;
 }
-Time.prototype.discount = () => {
-    if (this.time === 'moring') {
-        return 0.9;
-    } else {
-        return 1;
-    }
-};
-function Age(age) {
-    this.age = age;
-}
-Age.prototype.discount = () => {
-    if (this.age >= 7 && this.age <= 12) {
-        return 0.8; 
-    } else if (this.age <= 60) {
-        return 0.6;
-    } else {
-        return 1;
-    }
-};
+
+const morning = new Time('9:30AM', 0.9);
+const afternoon = new Time('4:15PM', 1);
+const evening = new Time('7:00PM', 1)
 
 function getMovie() {
     const movies = document.querySelectorAll('input[type="radio"]');
@@ -35,6 +25,28 @@ function getMovie() {
         }
     }
     return selectedMovie;
+}
+function getMovieTitle(movie) {
+    let movieTitle;
+    if (movie === 'marvels') {
+        movieTitle = marvels.title;
+    } else if (movie === 'minions') {
+        movieTitle = minions.title;
+    } else if (movie === 'notebook') {
+        movieTitle = notebook.title;
+    }
+    return movieTitle;
+}
+function getPrice(movie) {
+    let price;
+    if (movie === 'marvels') {
+        price = marvels.price;
+    } else if (movie === 'minions') {
+        price = minions.price;
+    } else if (movie === 'notebook') {
+        price = notebook.price;
+    }
+    return price;
 }
 function getTime() {
     const times = document.getElementById("time");
@@ -49,21 +61,24 @@ function getAge() {
     const age = document.getElementById("age").value;
     return age;
 }
-function getNumOfTicket() {
-    const numOfTicket = document.getElementById("ticket").value;
-    return numOfTicket;
-}
-function getDiscount() {
-    const time = getTime();
-    const age = getAge();
-    const timeObj = new Time(time);
-    const timeDiscount = timeObj.discount();
-    const ageObj = new Age(age);
-    const ageDiscount = ageObj.discount();
+function getDiscount(time, age) {
+    let timeDiscount;
+    let ageDiscount;
+    if (time === 'morning') {
+        timeDiscount = 0.9;
+    } else {
+        timeDiscount = 1;
+    }
+    if (age <= 12) {
+        ageDiscount = 0.8;
+    } else if (age >= 60) {
+        ageDiscount = 0.6;
+    } else {
+        ageDiscount = 1;
+    }
     return timeDiscount * ageDiscount;
 }
-function discountEligibility() {
-    const discountAmount = getDiscount();
+function discountEligibility(discountAmount) {
     if (discountAmount !== 1) {
         return 'Yes';
     } else {
@@ -71,24 +86,37 @@ function discountEligibility() {
     }
 };
 
-function Ticket(movie, time, discount, price) {
-    this.movie = movie;
-    this.time = time;
-    this.discount = discount;
-    this.price = price;
-}
-Ticket.prototype.orderSummary = () => {
-    return `This is your ticket summary: \n
-    ${this.movie} | ${this.time} | Discount: ${this.discount} \n
-    Final Price: ${this.price}`;
-}
-
-const marvels = new Movie('The Marvels', 12.75);
-const minions = new Movie('Minions', 10.75);
-const notebook = new Movie('Notebook', 8.50);
-
-function getInfo() {
+function getSummary() {
     const movie = getMovie();
+    const movieTitle = getMovieTitle(movie);
+    const price = getPrice(movie);
+
     const time = getTime();
-    const discount = getDiscount();
+    const timeTitle = time.charAt(0).toUpperCase() + time.substr(1);
+
+    const age = getAge();
+
+    const discountAmount = getDiscount(time, age);
+    const discount = discountEligibility(discountAmount);
+    const totalPrice = price * discountAmount;
+    const totalPriceFixed = parseFloat(totalPrice).toFixed(2);
+
+    return `Your movie ticket summary: \n
+    ${movieTitle} | ${timeTitle} | Discount: ${discount} \n
+    Ticket Price: ${totalPriceFixed}`;
+}
+
+function formHandler() {
+    const form = document.querySelector("form");
+    const final = document.getElementById("final");
+    const finalInfo = document.getElementById("finalInfo");
+    form.addEventListener("submit", e => {
+        e.preventDefault();
+        final.classList.remove("hidden");
+        finalInfo.innerText = getSummary();
+    })
+}
+
+window.onload = () => {
+    formHandler();
 }

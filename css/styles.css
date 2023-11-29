@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@300;400;500;600&display=swap");
 * {
   box-sizing: border-box;
   padding: 0;
@@ -6,11 +7,57 @@
 
 body {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: rgb(217, 233, 247);
+  font-family: "Zilla Slab", serif;
 }
 
-ul {
+form {
+  height: -moz-fit-content;
+  height: fit-content;
+}
+form h1 {
+  color: rgb(15, 15, 93);
+}
+form h3 {
+  margin-bottom: 0.5rem;
+  color: rgb(15, 15, 93);
+}
+form label {
+  padding-right: 1rem;
+}
+form ul {
   text-align: left;
   width: -moz-fit-content;
   width: fit-content;
   margin: auto;
+}
+form button {
+  font-family: "Zilla Slab", serif;
+  padding: 0.5rem 1.25rem;
+  border: 3px white solid;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+#result {
+  margin-top: 5vh;
+  width: 50vw;
+  min-height: 12vh;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+#result #final {
+  height: -moz-fit-content;
+  height: fit-content;
+  margin: auto 0;
+  padding: 1rem;
 }/*# sourceMappingURL=styles.css.map */
