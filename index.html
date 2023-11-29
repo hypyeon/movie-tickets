@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/scripts.js"></script>
+    <title>Movie Tickets</title>
+</head>
+<body>
+    <h1>Let's find out your movie ticket price.</h1>
+    <br>
+    <form>
+        <h3>Movies</h3>
+        <input type="radio" name="movie" value="marvels" id="marvels">
+        <label for="marvels">The Marvels</label>
+        <input type="radio" name="movie" value="minions" id="minions">
+        <label for="minions">Minions</label>
+        <input type="radio" name="movie" value="notebook" id="notebook">
+        <label for="notebook">Notebook</label>
+        <br><br>
+        <h3>Time</h3>
+        <select name="time" id="time">
+            <option value="morning">9:30AM</option>
+            <option value="afternoon">4:15PM</option>
+            <option value="evening">7:00PM</option>
+        </select>
+        <ul>
+            <li>10% OFF for morning times</li>
+        </ul>
+        <br>
+        <h3>Your age</h3>
+        <input type="number" name="age" id="age" min="7" style="width: 3rem">
+        <ul>
+            <li>20% OFF for age between 7 to 12</li>
+            <li>40% OFF for 60 and above</li>
+        </ul>
+        <br>
+        <button type="submit">Get ticket price</button>
+    </form>
+    <div>
+        <ul id="finalInfo"></ul>
+        <p id="finalPrice"></p>
+    </div>
+</body>
+</html>
