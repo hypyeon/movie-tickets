@@ -55,7 +55,7 @@ Code: getDiscount('afternoon', 20);
 Expected: 1;   
 ```
 ## Known Bugs
-- No issues found as of the last update. Feel free to [reach out](mailto:hayeong.pyeon@gmail.com) if encountered any.
+- Currently when no value is entered in either movie title or user age, it will still show result involving 'undefined'. 
 - Last updated: November 29, 2023
 
 ## License
