@@ -28,7 +28,7 @@ by [Hayeong Pyeon](https://www.hayeong.website)
 * Open `index.html` in your browser. 
 
 ## Link
-
+https://hypyeon.github.io/movie-tickets/ 
 
 ## Tests
 ```
